@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="menu" onclick="openDrawer()">&#9776;</div>
+  <div class="title">Bennett University</div>
+</div>
+
+<!-- OVERLAY -->
+<div id="overlay" class="overlay" onclick="closeDrawer()"></div>
+
+<!-- SIDE DRAWER -->
+<div id="drawer" class="drawer">
+  <div class="drawer-header">
+    <span onclick="closeDrawer()">✕</span>
+    <strong>Bennett University</strong>
+  </div>
+
+  <input class="search" placeholder="Search">
+
+  <ul class="drawer-menu">
+    <li>My institution</li>
+    <li>Messages</li>
+    <li>Attendance</li>
+    <li>Exam schedules</li>
+    <li>Reports</li>
+    <li>Progress report</li>
+    <li>Holidays</li>
+
+    <!-- ONLY WORKING ITEM -->
+    <li class="active" onclick="openCafeteria()">Cafeteria</li>
+
+    <li>Timetable</li>
+    <li>Leave and gate pass</li>
+    <li>Services</li>
+    <li>Enrollment</li>
+    <li>Transcript</li>
+    <li>Activity</li>
+    <li>Clearance</li>
+    <li>Announcement</li>
+    <li>Feedback</li>
+    <li>Project</li>
+  </ul>
+</div>
+
+
+<!-- TOP PROFILE CARD -->
+<div class="card small-card">
+  <img class="avatar-sm" id="imgTop">
+  <div>
+    <div class="name" id="dnameTop"></div>
+    <div class="sub">Bennett University</div>
+    <div class="sub">Semester - 4 | 2025-2026</div>
+  </div>
+</div>
+
+<!-- MAIN INFO CARD -->
+<div class="card main-card">
+  <img class="avatar-lg" id="img">
+
+  <h2 id="dname"></h2>
+
+  <div class="row">
+    <span>Student status</span>
+    <span class="badge">Active</span>
+  </div>
+
+  <div class="row">
+    <span>Admission No.</span>
+    <span id="denroll"></span>
+  </div>
+
+  <div class="row">
+    <span>Admission Year</span>
+    <span>2024-2025</span>
+  </div>
+
+  <div class="row">
+    <span>Roll No.</span>
+    <span>S24CSEU0127</span>
+  </div>
+
+  <div class="row">
+    <span>Degree</span>
+    <span>Undergraduate</span>
+  </div>
+
+  <div class="row">
+    <span>Department</span>
+    <span>School of Computer Science Engineering & Technology</span>
+  </div>
+
+  <div class="row">
+    <span>Semester</span>
+    <span>Semester - 4</span>
+  </div>
+
+  <div class="row">
+    <span>Course Name</span>
+    <span>Bachelor of Technology (Computer Science and Engineering)</span>
+  </div>
+
+  <div class="row">
+    <span>College</span>
+    <span>Bennett University</span>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div>👤</div>
+  <div>⚙️</div>
+  <div>⎋</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
