@@ -86,91 +86,41 @@ document.querySelectorAll('.dayPill').forEach(pill => {
   document.getElementById("dateLine").innerText =
     `${dateStr} - Today - First Floor`;
 
-  document.getElementById("dayPill").innerText = day;
+  // document.getElementById("dayPill").innerText = day;
 }
 
+window.addEventListener("load", function () {
 
+  const mealButtons = document.querySelectorAll(".cafeteria-btn");
 
+  const servingTimes = {
+    breakfast: "8:12 AM",
+    lunch: "12:21 PM",
+    snacks: "5:10 PM",
+    dinner: "8:15 PM"
+  };
 
+  mealButtons.forEach(button => {
+    button.addEventListener("click", function () {
 
+      const mealType = this.dataset.meal;
 
+      // ✅ toggle OFF if already selected
+      if (this.classList.contains("active-meal")) {
+        this.classList.remove("active-meal");
+        this.style.backgroundColor = "";
+        this.style.color = "black";
+        this.innerText = "Select";
+        return;
+      }
 
+      // ✅ activate button
+      this.classList.add("active-meal");
+      this.style.backgroundColor = "green";
+      this.style.color = "white";
+      this.innerText = `Meal served at ${servingTimes[mealType]}`;
 
-
-
-
-// const now = new Date();
-// const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-// document.querySelectorAll('.meal-btn').forEach(btn => {
-//   const meal = btn.dataset.meal;
-
-//   let servedTime = null;
-
-//   // Breakfast: after 9:00 AM
-//   if (meal === 'breakfast' && currentMinutes >= (9 * 60)) {
-//     servedTime = '8:20 AM';
-//   }
-
-//   // Lunch: after 1:00 PM
-//   if (meal === 'lunch' && currentMinutes >= (13 * 60)) {
-//     servedTime = '12:15 PM';
-//   }
-
-//   // Snacks: after 5:20 PM
-//   if (meal === 'snacks' && currentMinutes >= (17 * 60 + 20)) {
-//     servedTime = '5:03 PM';
-//   }
-
-//   // Dinner: after 8:40 PM
-//   if (meal === 'dinner' && currentMinutes >= (20 * 60 + 40)) {
-//     servedTime = '8:07 PM';
-//   }
-
-//   if (servedTime) {
-//     btn.textContent = `Meal served on ${servedTime}`;
-//     btn.classList.add('meal-served');
-//     btn.disabled = true;
-//   }
-// });
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-  document.querySelectorAll('.meal-btn').forEach(btn => {
-    const meal = btn.dataset.meal;
-    let servedTime = null;
-
-    // Breakfast: after 9:00 AM
-    if (meal === 'breakfast' && currentMinutes >= (9 * 60)) {
-      servedTime = '8:20 AM';
-    }
-
-    // Lunch: after 1:00 PM
-    if (meal === 'lunch' && currentMinutes >= (13 * 60)) {
-      servedTime = '12:15 PM';
-    }
-
-    // Snacks: after 5:20 PM
-    if (meal === 'snacks' && currentMinutes >= (17 * 60 + 20)) {
-      servedTime = '5:03 PM';
-    }
-
-    // Dinner: after 8:40 PM
-    if (meal === 'dinner' && currentMinutes >= (20 * 60 + 40)) {
-      servedTime = '8:07 PM';
-    }
-
-    if (servedTime) {
-      btn.textContent = `Meal served on ${servedTime}`;
-      btn.classList.add('meal-served');
-      btn.disabled = true;
-    }
+    });
   });
+
 });
