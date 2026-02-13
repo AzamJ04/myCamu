@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafeteria</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="menu" onclick="openDrawer()">&#9776;</div>
+  <div class="title">Bennett University</div>
+</div>
+
+<!-- PROFILE CARD -->
+<div class="card small-card">
+  <img class="avatar-sm" id="imgTop">
+  <div>
+    <div class="name" id="dnameTop"></div>
+    <div class="sub">Bennett University</div>
+    <div class="sub">Semester - 4 | 2025-2026</div>
+  </div>
+</div>
+
+<!-- CAFETERIA TITLE -->
+<div class="section">
+  <h2>Cafeteria</h2>
+  <p class="muted" id="dateLine"></p>
+</div>
+
+<!-- QR CARD -->
+<div class="card qr-card">
+  <div class="qr-row">
+    <span class="qr-icon">▣▣</span>
+    <strong>Do you want to generate a reusable permanent QR code?</strong>
+  </div>
+
+  <button class="btn-outline" style="color:black;">Show my reusable QR code</button>
+  <button class="btn-primary">Regenerate my reusable QR code</button>
+</div>
+
+<!-- MEAL CARD -->
+<div class="card meal-card">
+  <img src="spoon.png" class="meal-img"><br>
+
+  <div class="meal-info">
+    <strong>Breakfast 07:30 AM - 09:30 AM</strong>
+
+    <p class="menu">
+      Breakfast(Fri)- Indori Poha - (130 Kcal)<br>
+      Green Chutney - (90 Kcal)<br><br>
+
+      egg bhurji (185 Kcal)<br>
+      Mix Fruits - (57 Kcal)<br>
+      masala Sprouts - (45 Kcal)<br>
+      Jam - (276 Kcal), Brown - (282 Kcal) & White Bread - (302 Kcal)<br>
+      Milk - (59 Kcal) / Tea - (30 Kcal) / Coffee - (30 Kcal)
+    </p>
+
+    <div class="meal-footer">
+      <span class="pill dayPill"></span>
+      <!-- <button class="blah_select small meal-btn" data-meal="breakfast" style="color:black;">Select</button> -->
+      <button id="dinnerBtn" class="cafeteria-btn" data-meal="breakfast">Select</button>
+
+    </div>
+  </div>
+<!-- -------------------------------------------------------- -->
+  <img src="spoon.png" class="meal-img"><br>
+
+  <div class="meal-info">
+    <strong>Lunch 12:00 PM - 03:00 PM</strong>
+
+    <p class="menu">
+      Lunch(Fri)-Paneer Lababdar- (185 Kcal)<br>
+      Khata Mitha Sitafal- (135Kcal)<br><br>
+
+      Red Masoor- (278 Kcal)<br>
+      Jeera Rice- (184 Kcal)<br>
+        Sambar- (133 Kcal)<br>
+        Roti- (280 Kcal)<br>
+        Carrot Beetroot-(80 Kcal)<br>
+        Curd- (78 Kcal)
+    </p>
+
+    <div class="meal-footer">
+      <span class="pill dayPill"></span>
+      <!-- <button class="blah_select small meal-btn" data-meal="lunch" style="color:black;">Select</button> -->
+      <button id="dinnerBtn" class="cafeteria-btn" data-meal="lunch">Select</button>
+
+    </div>
+  </div>
+
+<!-- -------------------------------------------------------- -->
+
+<img src="spoon.png" class="meal-img"><br>
+
+  <div class="meal-info">
+    <strong>Snack 5:00 PM - 6:00 PM</strong>
+
+    <p class="menu">
+      Snack(Fri)-aloo papdi chaat<br>
+        Sweet-(120 Kcal) & Green Chutney(90Kcal)<br>
+        Tea- (30 Kcal)<br>
+        Tang- (54 Kcal)
+    </p>
+
+    <div class="meal-footer">
+      <span class="pill dayPill"></span>
+      <!-- <button class="blah_select small meal-btn" data-meal="snacks" style="color:black;">Select</button> -->
+       <button id="dinnerBtn" class="cafeteria-btn" data-meal="snacks">Select</button>
+
+    </div>
+  </div>
+
+
+<!-- -------------------------------------------------------- -->
+
+
+<img src="spoon.png" class="meal-img"><br>
+
+  <div class="meal-info">
+    <strong>Dinner 08:00 PM - 10:00 PM</strong>
+
+    <p class="menu">
+      Dinner(Fri)-Aloo Capsicum -(80 Kcal)<br><br>
+        baingan bharta- (188 Kcal)<br>
+        Hariyali Dal-(149 Kcal)<br>
+        Steamed Rice- (130 Kcal)<br>
+        Roti- (280 Kcal)<br>
+        fruit custard<br>
+        Shirka Onion- (68 Kcal)<br>
+        Veg Clear Soup- (39 Kcal)
+    </p>
+
+    <div class="meal-footer">
+      <span class="pill dayPill"></span>
+      <!-- <button class="blah_select small meal-btn" data-meal="dinner" style="color:black;">Select</button> -->
+      <button id="dinnerBtn" class="cafeteria-btn" data-meal="dinner">Select</button>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div>👤</div>
+  <div>⚙️</div>
+  <div>⎋</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
