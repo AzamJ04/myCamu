@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bennett University Student Portal</title>
+  <meta name="description" content="Official Student Portal of Bennett University. Access profile, attendance, grades, and academic info.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- JS Script -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+  
+  <div id="screen-wrapper">
+    <!-- Outer Mockup Container for Desktop View, full screen on Mobile -->
+    <div id="app-container">
+      
+      <!-- ============================================== -->
+      <!-- 1. ONBOARDING SCREEN                           -->
+      <!-- ============================================== -->
+      <section id="onboarding-screen" class="view-panel active">
+        <div class="onboarding-card">
+          <div class="onboarding-logo">
+            <svg class="icon-logo" viewBox="0 0 24 24" width="48" height="48">
+              <path fill="currentColor" d="M12 3L1 9l11 6l9-4.91V17h2V9L12 3zM5.89 12.5L12 15.82l6.11-3.32L12 18.25L5.89 12.5z"/>
+            </svg>
+            <h2>Student Portal Setup</h2>
+            <p>Welcome! Enter your details to configure your digital student portal card.</p>
+          </div>
+          
+          <form id="onboarding-form" novalidate>
+            <div class="form-row">
+              <div class="form-group photo-upload-group">
+                <label>Profile Photo</label>
+                <div class="photo-upload-container" id="photo-dropzone">
+                  <input type="file" id="student-photo-input" accept="image/*" hidden>
+                  <div class="photo-preview-placeholder" id="photo-preview-box">
+                    <svg viewBox="0 0 24 24" width="32" height="32" class="upload-icon">
+                      <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <span>Tap to upload photo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="student-name">Full Name</label>
+                <input type="text" id="student-name" placeholder="e.g. Azam Jamal" required value="Azam Jamal">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="student-roll">Roll No. / Enrollment Number</label>
+                <input type="text" id="student-roll" placeholder="e.g. S24CSEU0366" required value="S24CSEU0366">
+              </div>
+            </div>
+
+
+
+            <button type="submit" class="btn-submit">Configure Portal</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- 2. MAIN PORTAL CONTAINER                      -->
+      <!-- ============================================== -->
+      <main id="portal-screen" class="view-panel">
+        
+        <!-- Header Bar -->
+        <header id="app-header">
+          <div class="header-left">
+            <button id="menu-toggle-btn" class="header-icon-btn" aria-label="Open navigation menu">
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+              </svg>
+            </button>
+            <span class="brand-title">Bennett University</span>
+          </div>
+          <div class="header-right">
+            <button id="profile-view-btn" class="header-icon-btn active" aria-label="View Profile">
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+              </svg>
+            </button>
+            <button id="logout-btn" class="header-icon-btn" aria-label="Logout">
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Dynamic Content Section -->
+        <div id="scrollable-content">
+
+          <!-- A. Home View (Complete Profile Dashboard) -->
+          <section id="home-view" class="sub-view active">
+            
+            <!-- Mini Profile Banner (inside scrollable content so it scrolls away) -->
+            <div id="mini-profile-banner">
+              <div class="banner-avatar-container">
+                <img class="student-avatar-img mini-avatar" src="" alt="Student Profile Mini Preview">
+              </div>
+              <div class="banner-info">
+                <h1 class="student-name-text">Azam Jamal</h1>
+                <p class="student-college-text">Bennett University</p>
+                <p class="student-semester-text">Semester - 5 | 2026-2027</p>
+              </div>
+            </div>
+
+            <div class="photo-container-large">
+              <div class="photo-frame-inner">
+                <img class="student-avatar-img large-avatar" src="" alt="Student Profile Frame">
+              </div>
+            </div>
+            
+            <h2 class="student-name-text profile-under-name">Azam Jamal</h2>
+
+            <!-- Academic Info Details Card -->
+            <div class="details-card light-blue-card">
+              <div class="details-grid">
+                <div class="grid-row">
+                  <div class="grid-label">Student Status</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value"><span class="status-pill active">Active</span></div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Admission No.</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-admission-no">830</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Admission Year</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">2024-2025</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Roll No.</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value student-roll-text">S24CSEU0366</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Degree</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">Undergraduate</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Department</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">School of Computer Science Engineering & Technology</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Semester</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">Semester - 5</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Course Name</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">Bachelor of Technology (Computer Science and Engineering)</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">College</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">Bennett University</div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Curriculum Plan</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">B.Tech-CSE-2024- Data Science</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Academic Standing Card (Second Screenshot Upper Part) -->
+            <div class="details-card light-blue-card academic-top-card" style="margin-top: 20px;">
+              <div class="details-grid">
+                <div class="grid-row">
+                  <div class="grid-label">Academic Standing</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value"></div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Academic Classification</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value"></div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Discount Category</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value"></div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Intake</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value"></div>
+                </div>
+                <div class="grid-row">
+                  <div class="grid-label">Program Validity Date</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value">30-06-2028</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Nav Strip (Second Screenshot Divider Buttons) -->
+            <div class="profile-header-strip">
+              <h3>Profile</h3>
+              <div class="strip-buttons">
+                <button class="strip-btn active-btn">More Info</button>
+                <button class="strip-btn">Manage Accounts</button>
+              </div>
+            </div>
+
+            <!-- Personal Details White Card (Second Screenshot Lower Part) -->
+            <div id="personal-details-card" class="details-card white-card border-card">
+              <div class="details-grid">
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Title</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value"></div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">First Name</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-first-name">Azam</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Last Name</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-last-name">Jamal</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">DOB</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-dob">29-12-2004</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Age</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-age">—</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Gender</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-gender">Male</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Father's Name</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-father">Jamal Ahmad Khan</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Mother's Name</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-mother">Sufiya</div>
+                </div>
+                <div class="grid-row border-bottom-row">
+                  <div class="grid-label">Address</div>
+                  <div class="grid-colon">:</div>
+                  <div class="grid-value" id="val-address">127/662, W-Block, Keshav Nagar, Kanpur, Uttar Pradesh, IN</div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- C. Apps View (Bonus Dashboard Widgets) -->
+          <section id="apps-view" class="sub-view">
+            <div class="view-header">
+              <h2>My Applications</h2>
+              <p>Quick access to university portals and widgets.</p>
+            </div>
+            
+            <div class="apps-grid">
+              <div class="app-widget attendance-widget">
+                <div class="widget-header">
+                  <h3>Attendance Tracker</h3>
+                  <span class="badge green">Good</span>
+                </div>
+                <div class="attendance-ring-container">
+                  <div class="progress-ring">
+                    <svg viewBox="0 0 36 36" class="circular-chart blue">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path class="circle" stroke-dasharray="85, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <text x="18" y="20.35" class="percentage">85%</text>
+                    </svg>
+                  </div>
+                </div>
+                <p class="widget-desc">Overall Attendance. Min 75% required.</p>
+              </div>
+
+              <div class="app-widget text-widget" id="apps-cafeteria-widget" style="cursor: pointer;">
+                <div class="widget-header">
+                  <h3>Cafeteria Token</h3>
+                  <span class="badge blue">Active</span>
+                </div>
+                <div class="widget-content">
+                  <p class="token-number">#BU-8893</p>
+                  <p class="widget-desc">Meal: Lunch | Coupon Valid Today</p>
+                </div>
+              </div>
+
+              <div class="app-widget text-widget">
+                <div class="widget-header">
+                  <h3>Next Class</h3>
+                </div>
+                <div class="widget-content">
+                  <p class="class-subject">Deep Learning Lab</p>
+                  <p class="class-time">02:30 PM - 04:30 PM</p>
+                  <p class="widget-desc">Room: B-Block 402</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- D. Accessibility Settings View -->
+          <section id="accessibility-view" class="sub-view">
+            <div class="view-header">
+              <h2>Accessibility Settings</h2>
+              <p>Customize portal visibility & controls to your comfort.</p>
+            </div>
+            <div class="details-card white-card border-card">
+              <div class="setting-row">
+                <div class="setting-info">
+                  <h4>High Contrast Mode</h4>
+                  <p>Increase portal text visibility</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-contrast">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <h4>Text Scaling</h4>
+                  <p>Enlarge typography for easy reading</p>
+                </div>
+                <div class="scale-buttons">
+                  <button class="scale-btn" id="btn-scale-normal">A</button>
+                  <button class="scale-btn" id="btn-scale-large">A+</button>
+                  <button class="scale-btn" id="btn-scale-xl">A++</button>
+                </div>
+              </div>
+              <div class="setting-row">
+                <div class="setting-info">
+                  <h4>Visual Aid Grid</h4>
+                  <p>Highlight grid boxes and table lists</p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-visual-aids">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <!-- E. Settings View -->
+          <section id="settings-view" class="sub-view">
+            <div class="view-header">
+              <h2>Portal Settings</h2>
+              <p>Modify and sync your profile parameters.</p>
+            </div>
+            <form id="settings-form" class="details-card white-card border-card">
+              <div class="form-group">
+                <label>Change Profile Image</label>
+                <div class="photo-upload-container settings-upload-container">
+                  <input type="file" id="settings-photo-input" accept="image/*" hidden>
+                  <div class="photo-preview-placeholder" id="settings-photo-preview-box">
+                    <img class="student-avatar-img settings-preview-img" src="" alt="Thumbnail preview">
+                    <span>Tap to replace photo</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="settings-name">Full Name</label>
+                <input type="text" id="settings-name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="settings-roll">Roll No.</label>
+                <input type="text" id="settings-roll" required>
+              </div>
+
+
+
+              <button type="submit" class="btn-submit">Save Settings</button>
+            </form>
+          </section>
+
+          <!-- F. Cafeteria View -->
+          <section id="cafeteria-view" class="sub-view">
+            <!-- Mini Profile Banner (inside scrollable content so it scrolls away) -->
+            <div id="mini-profile-banner" style="margin-bottom: 16px;">
+              <div class="banner-avatar-container">
+                <img class="student-avatar-img mini-avatar" src="" alt="Student Profile Mini Preview">
+              </div>
+              <div class="banner-info">
+                <h1 class="student-name-text">Azam Jamal</h1>
+                <p class="student-college-text">Bennett University</p>
+                <p class="student-semester-text">Semester - 5 | 2026-2027</p>
+              </div>
+            </div>
+
+            <div class="view-header">
+              <h2>Cafeteria</h2>
+              <p class="cafeteria-date-floor" id="cafeteria-date-display">12-Aug-2026-Today-First Floor</p>
+            </div>
+
+            <!-- QR code card -->
+            <div class="cafeteria-qr-card">
+              <div class="qr-card-top">
+                <svg viewBox="0 0 24 24" width="24" height="24" class="qr-card-icon">
+                  <path fill="currentColor" d="M3 3h8v8H3V3zm2 2v4h4V5H5zm14-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13 1h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm2-4h2v2h-2v-2zm2 2h2v2h-2v-2zM15 15h2v2h-2v-2zm0 2h2v2h-2v-2zm2-4h2v2h-2v-2z" />
+                </svg>
+                <p class="qr-card-text">Do you want to generate a reusable permanent QR code?</p>
+              </div>
+              <div class="qr-card-buttons">
+                <button class="qr-btn-outline" id="btn-show-qr">Show my reusable QR code</button>
+                <button class="qr-btn-filled" id="btn-regen-qr">Regenerate my reusable QR code</button>
+              </div>
+            </div>
+
+            <!-- QR Modal (Redesigned as bottom sheet / mockup card drawer) -->
+            <div id="qr-modal" class="modal">
+              <div class="modal-content">
+                <div class="modal-notch"></div>
+                <div class="modal-header">
+                  <span class="modal-title">Permanent QR Code</span>
+                  <span class="close-modal" id="close-qr-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                  <p class="modal-instruction">Show the QR code to the cafeteria staff</p>
+                  
+                  <div class="qr-code-box" style="padding: 10px; background: #fff; border-radius: 8px;">
+                    <img src="qr_code.png" alt="Permanent Reusable QR Code" style="display: block; margin: 0 auto; width: 300px; height: 300px; object-fit: contain;">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="modal-download-btn" id="btn-download-qr">Download</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Meal QR Modal (Shows when clicking Select) -->
+            <div id="meal-qr-modal" class="modal">
+              <div class="modal-content">
+                <div class="modal-notch"></div>
+                <div class="modal-header">
+                  <span class="modal-title" id="meal-modal-title">Snack 05:00 PM - 06:00 PM</span>
+                  <span class="close-modal" id="close-meal-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                  <p class="modal-instruction">Show QR code to mess staff</p>
+                  
+                  <div class="qr-code-box" style="padding: 10px; background: #fff; border-radius: 8px; margin: 0 auto 12px 0; border: 1.5px solid #e2e8f0; display: block; width: fit-content;">
+                    <img src="qr_code.png" alt="Meal Token QR Code" style="display: block; width: 220px; height: 220px; object-fit: contain;">
+                  </div>
+
+                  <!-- Center Fork & Spoon SVG -->
+                  <svg class="modal-meal-svg-icon" viewBox="0 0 100 100" width="240" height="240" style="width: 240px; height: 240px; display: block; margin: 16px auto; color: #6c7a9c;">
+                    <path fill="#6c7a9c" d="M15,35 V15 A4,4 0 0,1 23,15 V35 H27 V15 A4,4 0 0,1 35,15 V35 H39 V15 A4,4 0 0,1 47,15 V35 C47,48 40,52 35,52 V90 A4,4 0 0,1 27,90 V52 C22,52 15,48 15,35 Z M70,12 C57,12 54,23 54,35 C54,47 61,52 66,52 V90 A4,4 0 0,0 74,90 V52 C79,52 86,47 86,35 C86,23 83,12 70,12 Z" />
+                  </svg>
+
+                  <!-- Dynamic Menu Items List -->
+                  <p class="meal-modal-menu-text" id="meal-modal-menu-items" style="font-size: 13.5px; line-height: 1.5; color: var(--navy-dark); margin: 8px auto 16px; text-align: center; font-weight: 500;">
+                    Papdi Chaat - (270 kcal) Sweet-(120 Kcal) & Green Chutney(90Kcal) Tea- (30 Kcal) Tang- (54 Kcal)
+                  </p>
+
+                  <!-- Dynamic Day Badge Centered -->
+                  <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                    <span class="meal-day-badge" id="meal-modal-day">Wednesday</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Meals List -->
+            <div class="cafeteria-meals-list">
+              
+              <!-- Breakfast -->
+              <div class="meal-section-card">
+                <svg class="meal-svg-icon" viewBox="0 0 100 100" width="250" height="250">
+                  <path fill="#6c7a9c" d="M15,35 V15 A4,4 0 0,1 23,15 V35 H27 V15 A4,4 0 0,1 35,15 V35 H39 V15 A4,4 0 0,1 47,15 V35 C47,48 40,52 35,52 V90 A4,4 0 0,1 27,90 V52 C22,52 15,48 15,35 Z M70,12 C57,12 54,23 54,35 C54,47 61,52 66,52 V90 A4,4 0 0,0 74,90 V52 C79,52 86,47 86,35 C86,23 83,12 70,12 Z" />
+                </svg>
+                <div class="meal-details">
+                  <h4 class="meal-title-time">Breakfast 07:30 AM - 09:30 AM</h4>
+                  <div class="meal-menu-items">
+                    <p>Breakfast(Wed)-Indori Poha</p>
+                    <p>Green Chutney-(90Kcal)</p>
+                    <p class="menu-spacer" style="height: 10px;"></p>
+                    <p>Papaya (65Kcal)</p>
+                    <p>Mix Sprout - (380 Kcal)</p>
+                    <p>Jam- (276 Kcal),Brown- (282 Kcal) & White Bread- (302 Kcal)</p>
+                    <p>Milk- (59 Kcal)/Tea- (30 Kcal)/Coffee- (30 Kcal)</p>
+                  </div>
+                  <div class="meal-card-footer">
+                    <span class="meal-day-badge">Wednesday</span>
+                    <button class="meal-status-btn" data-meal="breakfast">Select</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Lunch -->
+              <div class="meal-section-card">
+                <svg class="meal-svg-icon" viewBox="0 0 100 100" width="250" height="250">
+                  <path fill="#6c7a9c" d="M15,35 V15 A4,4 0 0,1 23,15 V35 H27 V15 A4,4 0 0,1 35,15 V35 H39 V15 A4,4 0 0,1 47,15 V35 C47,48 40,52 35,52 V90 A4,4 0 0,1 27,90 V52 C22,52 15,48 15,35 Z M70,12 C57,12 54,23 54,35 C54,47 61,52 66,52 V90 A4,4 0 0,0 74,90 V52 C79,52 86,47 86,35 C86,23 83,12 70,12 Z" />
+                </svg>
+                <div class="meal-details">
+                  <h4 class="meal-title-time">Lunch 12:00 PM - 03:00 PM</h4>
+                  <div class="meal-menu-items">
+                    <p>Lunch(Wed)-Paneer Tikka Masala-(175 Kcal)</p>
+                    <p>Tawa Mix veg - ( 190Kcal)</p>
+                    <p>Arhar Dal Tadka- (155 Kcal)</p>
+                    <p>Matar Pulao- (130 Kcal)</p>
+                    <p>Sambar- (130 Kcal)</p>
+                    <p>Roti- (280 Kcal)</p>
+                    <p>Green salad- (68 Kcal)</p>
+                    <p>Sweet Lassi (150 Kcal)</p>
+                  </div>
+                  <div class="meal-card-footer">
+                    <span class="meal-day-badge">Wednesday</span>
+                    <button class="meal-status-btn" data-meal="lunch">Select</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Snack -->
+              <div class="meal-section-card">
+                <svg class="meal-svg-icon" viewBox="0 0 100 100" width="250" height="250">
+                  <path fill="#6c7a9c" d="M15,35 V15 A4,4 0 0,1 23,15 V35 H27 V15 A4,4 0 0,1 35,15 V35 H39 V15 A4,4 0 0,1 47,15 V35 C47,48 40,52 35,52 V90 A4,4 0 0,1 27,90 V52 C22,52 15,48 15,35 Z M70,12 C57,12 54,23 54,35 C54,47 61,52 66,52 V90 A4,4 0 0,0 74,90 V52 C79,52 86,47 86,35 C86,23 83,12 70,12 Z" />
+                </svg>
+                <div class="meal-details">
+                  <h4 class="meal-title-time">Snack 05:00 PM - 06:00 PM</h4>
+                  <div class="meal-menu-items">
+                    <p>Snack(Wed)-Papdi Chaat - (270 kcal)</p>
+                    <p>Sweet-(120 Kcal) & Green Chutney(90Kcal)</p>
+                    <p>Tea- (30 Kcal)</p>
+                    <p>Tang- (54 Kcal)</p>
+                  </div>
+                  <div class="meal-card-footer">
+                    <span class="meal-day-badge">Wednesday</span>
+                    <button class="meal-status-btn" data-meal="snack">Select</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dinner -->
+              <div class="meal-section-card">
+                <svg class="meal-svg-icon" viewBox="0 0 100 100" width="250" height="250">
+                  <path fill="#6c7a9c" d="M15,35 V15 A4,4 0 0,1 23,15 V35 H27 V15 A4,4 0 0,1 35,15 V35 H39 V15 A4,4 0 0,1 47,15 V35 C47,48 40,52 35,52 V90 A4,4 0 0,1 27,90 V52 C22,52 15,48 15,35 Z M70,12 C57,12 54,23 54,35 C54,47 61,52 66,52 V90 A4,4 0 0,0 74,90 V52 C79,52 86,47 86,35 C86,23 83,12 70,12 Z" />
+                </svg>
+                <div class="meal-details">
+                  <h4 class="meal-title-time">Dinner 08:00 PM - 10:00 PM</h4>
+                  <div class="meal-menu-items">
+                    <p>Dinner(Wed)-Mushroom Matar - (275 Kcal)</p>
+                    <p>Dum Aloo- (85 Kcal)</p>
+                    <p>Dhaba Dal(145 kcal)</p>
+                    <p>Steamed Rice- (130 Kcal)</p>
+                    <p>Roti- (280 Kcal)</p>
+                    <p>Atta Halwa-(280 Kcal)</p>
+                    <p>Green Salad- (17 Kcal)</p>
+                    <p>Tomato Shorba- (65 Kcal)</p>
+                  </div>
+                  <div class="meal-card-footer">
+                    <span class="meal-day-badge">Wednesday</span>
+                    <button class="meal-status-btn" data-meal="dinner">Select</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+        <!-- Bottom Navigation Bar -->
+        <footer id="app-bottom-nav">
+          <button id="nav-apps-btn" class="nav-item-btn" aria-label="Apps">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/>
+            </svg>
+            <span>Apps</span>
+          </button>
+          <button id="nav-accessibility-btn" class="nav-item-btn" aria-label="Accessibility">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+            </svg>
+            <span>Accessibility</span>
+          </button>
+          <button id="nav-settings-btn" class="nav-item-btn" aria-label="Settings">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+            </svg>
+            <span>Settings</span>
+          </button>
+        </footer>
+
+        <!-- Sidebar Drawer (Hamburger Menu) -->
+        <aside id="sidebar-drawer">
+          <div class="sidebar-header">
+            <button id="menu-close-btn" class="header-icon-btn" aria-label="Close navigation menu">
+              <svg viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+            </button>
+            <div class="sidebar-divider-line"></div>
+            <span class="sidebar-brand-title">Bennett University</span>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="sidebar-search-box">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 5 9.5 7.01 14 9.5 14z"/>
+              </svg>
+              <input type="text" id="menu-search-input" placeholder="Search" aria-label="Search navigation items">
+            </div>
+          </div>
+
+          <!-- Scrollable Navigation Items -->
+          <nav class="sidebar-nav-list" id="sidebar-items-container">
+            <a href="#" class="sidebar-nav-item" data-action="institution">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 3L1 9l11 6l9-4.91V17h2V9L12 3zm-1.8 15.34L5 15.45v-2.3l5.2 2.82v2.37zm1.8 1L6.8 16.54v-2.3l5.2 2.82v2.28zm5.2-3.83L12 12.69v-2.3l5.2 2.82v2.33zm1.8 1L12.02 14.1v-2.3l5.18 2.82v2.31z"/></svg>
+              <span>My Institution</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="messages">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+              <span>Messages</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="attendance">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM17.6 10.6L16.2 9.2l-5.6 5.6-2.4-2.4-1.4 1.4 3.8 3.8z"/></svg>
+              <span>Attendance</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="exams">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V9h14v10zm-8-7h6v2h-6v-2zm0 4h6v2h-6v-2z"/></svg>
+              <span>Exam schedules</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="reports">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+              <span>Reports</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="progress">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+              <span>Progress Report</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="holidays">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zM4 10.5H1v2h3v-2zm9-8h-2v3h2v-3zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.8 1.79 1.41-1.41-1.79-1.8-1.42 1.42zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-5.44 14.3l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8zM11 18.5h2v3h-2v-3z"/></svg>
+              <span>Holidays</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="cafeteria">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+              <span>Cafeteria</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="timetable">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"/></svg>
+              <span>Timetable</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="leave">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V9h14v10zm-4.12-7.12L13.06 13.8l-1.82-1.82-1.06 1.06 1.82 1.82-1.82 1.82 1.06 1.06 1.82-1.82 1.82 1.82 1.06-1.06-1.82-1.82 1.82-1.82-1.06-1.06z"/></svg>
+              <span>Leave and Gate Pass</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="services">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/></svg>
+              <span>Services</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="enrollment">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <span>Enrollment</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="activity">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
+              <span>Activity</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="clearance">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              <span>Clearance</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="announcement">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 12c0-1.1.9-2 2-2V8c-1.1 0-2-.9-2-2h-3c0 1.1-.9 2-2 2v2c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2v2c1.1 0 2 .9 2 2h3c0-1.1.9-2 2-2v-2c-1.1 0-2-.9-2-2v-2zm-10 .75v-1.5C10 9.01 8.21 7.25 6 7.25S2 9.01 2 11.25v1.5c0 2.24 1.79 4 4 4s4-1.76 4-4zM7.5 12h-3v-1.5h3V12zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm0-4h-2V7h2v8z"/></svg>
+              <span>Announcement</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="feedback">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+              <span>Feedback</span>
+            </a>
+            <a href="#" class="sidebar-nav-item" data-action="gallery">
+              <svg class="nav-item-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 16V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H4l7-9z"/></svg>
+              <span>Gallery</span>
+            </a>
+          </nav>
+        </aside>
+
+        <!-- Sidebar Backdrop -->
+        <div id="sidebar-backdrop"></div>
+
+      </main>
+
+    </div>
+  </div>
+
+</body>
+</html>

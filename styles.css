@@ -1,0 +1,1364 @@
+/* ==========================================================================
+   Bennett University Student Portal CSS Design
+   ========================================================================== */
+
+/* Design Tokens & Variables */
+:root {
+  --bg-app-blue: #e8f4fc;
+  --bg-header: #ffffff;
+  --bg-white: #ffffff;
+  
+  /* Palette */
+  --navy-dark: #1c2a43;
+  --navy-muted: #475569;
+  --navy-light: #64748b;
+  --primary-blue: #2b6cb0;
+  --primary-blue-hover: #1d4ed8;
+  --accent-green-bg: #e2f6ec;
+  --accent-green-text: #059669;
+  --border-color: #e2e8f0;
+  --border-color-dark: #cbd5e1;
+  --input-focus: #3b82f6;
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  /* Transitions */
+  --transition-speed: 0.25s;
+}
+
+/* Reset Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background: #0f172a; /* Desktop backdrop */
+  color: var(--navy-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Base Accessibility / Text Scaling */
+body.accessibility-large {
+  font-size: 1.15rem;
+}
+body.accessibility-large .grid-value,
+body.accessibility-large .grid-label {
+  font-size: 17px !important;
+}
+body.accessibility-large .student-name-text {
+  font-size: 24px !important;
+}
+
+body.accessibility-xl {
+  font-size: 1.3rem;
+}
+body.accessibility-xl .grid-value,
+body.accessibility-xl .grid-label {
+  font-size: 19px !important;
+}
+body.accessibility-xl .student-name-text {
+  font-size: 28px !important;
+}
+
+body.high-contrast {
+  --bg-app-blue: #ffffff;
+  --navy-dark: #000000;
+  --navy-muted: #111111;
+  --navy-light: #222222;
+  --primary-blue: #0000ff;
+  --border-color: #000000;
+  --border-color-dark: #000000;
+}
+body.high-contrast .details-card {
+  border: 2px solid #000 !important;
+  background: #fff !important;
+}
+body.high-contrast .status-pill {
+  border: 1px solid #000;
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.visual-aids .grid-row {
+  border: 1px dashed var(--primary-blue) !important;
+  margin-bottom: 4px;
+  background: rgba(43, 108, 176, 0.05);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Layout Containers
+   ========================================================================== */
+
+/* Main wrapper to center mobile mockup on desktops */
+#screen-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #1e293b, #0f172a);
+}
+
+/* App container acts as a simulated smartphone frame on desktop */
+#app-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 450px;
+  max-height: 900px;
+  background-color: var(--bg-white);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop style mockup borders */
+@media (min-width: 480px) {
+  #app-container {
+    border-radius: 36px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                0 0 0 12px #334155; /* outer frame */
+    height: 92vh;
+  }
+}
+
+/* View panel switcher styles */
+.view-panel {
+  display: none;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--bg-white);
+}
+
+.view-panel.active {
+  display: flex;
+}
+
+/* ==========================================================================
+   1. Onboarding Screen Styling
+   ========================================================================== */
+#onboarding-screen {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.onboarding-card {
+  background: var(--bg-white);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.onboarding-logo {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--primary-blue);
+}
+
+.onboarding-logo h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 12px;
+  color: var(--navy-dark);
+}
+
+.onboarding-logo p {
+  font-size: 13px;
+  color: var(--navy-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* Form Styles */
+.form-row {
+  margin-bottom: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy-muted);
+  margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+  font-family: var(--font-family);
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-color-dark);
+  border-radius: 8px;
+  color: var(--navy-dark);
+  outline: none;
+  transition: border-color var(--transition-speed);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--input-focus);
+}
+
+/* Drag and Drop Image Upload */
+.photo-upload-group {
+  align-items: center;
+}
+
+.photo-upload-container {
+  width: 100%;
+  max-width: 180px;
+  height: 140px;
+  border: 2px dashed var(--primary-blue);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f8fafc;
+  overflow: hidden;
+  transition: background-color var(--transition-speed);
+}
+
+.photo-upload-container:hover {
+  background-color: #f1f5f9;
+}
+
+.photo-preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--primary-blue);
+  padding: 12px;
+  text-align: center;
+}
+
+.photo-preview-placeholder span {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.upload-icon {
+  opacity: 0.8;
+}
+
+.preview-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.btn-submit:hover {
+  background-color: var(--primary-blue-hover);
+}
+
+/* ==========================================================================
+   2. Portal Shell Elements (Header & Nav)
+   ========================================================================== */
+
+/* Header styling matches Bennett portal exactly */
+#app-header {
+  height: 56px;
+  background-color: var(--bg-header);
+  border-bottom: 1.5px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy-dark);
+  letter-spacing: -0.3px;
+}
+
+.header-icon-btn {
+  background: none;
+  border: none;
+  color: var(--navy-dark);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-speed);
+}
+
+.header-icon-btn:hover {
+  background-color: #f1f5f9;
+}
+
+.header-icon-btn.active {
+  color: var(--primary-blue);
+}
+
+/* Mini Profile Banner Strip */
+#mini-profile-banner {
+  background-color: var(--bg-header);
+  border-bottom: 1.5px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.banner-avatar-container {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f1f5f9;
+  border: 1px solid var(--border-color-dark);
+  flex-shrink: 0;
+}
+
+.mini-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-name-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy-dark);
+  line-height: 1.25;
+}
+
+.student-college-text {
+  font-size: 13px;
+  color: var(--navy-muted);
+  margin-top: 2px;
+}
+
+.student-semester-text {
+  font-size: 12px;
+  color: var(--navy-light);
+  margin-top: 1px;
+}
+
+/* Content Area Layout */
+#scrollable-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: var(--bg-app-blue);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar Customization for premium feel */
+#scrollable-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+#scrollable-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#scrollable-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+#scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Sub-views style */
+.sub-view {
+  display: none;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+}
+
+.sub-view.active {
+  display: flex;
+}
+
+/* ==========================================================================
+   3. View A: Home View (Profile Main Card)
+   ========================================================================== */
+
+/* Large Photo portrait box */
+.photo-container-large {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 4px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.photo-frame-inner {
+  width: 135px;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  border: 1px solid #c2b49c; /* simulated border from image */
+  background-color: #cbd5e1;
+}
+
+.large-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Under photo name title */
+.profile-under-name {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 20px;
+  padding-left: 4px;
+  color: var(--navy-dark);
+}
+
+/* Details Grid Style */
+.details-card {
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+}
+
+.light-blue-card {
+  background-color: var(--bg-app-blue);
+}
+
+.white-card {
+  background-color: var(--bg-white);
+}
+
+.border-card {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: 145px 15px 1fr;
+  align-items: start;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.grid-label {
+  color: var(--navy-muted);
+  font-weight: 400;
+}
+
+.grid-colon {
+  color: var(--navy-muted);
+  text-align: center;
+  font-weight: 400;
+}
+
+.grid-value {
+  color: var(--navy-dark);
+  font-weight: 400;
+  word-break: break-word;
+}
+
+/* Active Status Pill */
+.status-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.status-pill.active {
+  background-color: var(--accent-green-bg);
+  color: var(--accent-green-text);
+}
+
+/* ==========================================================================
+   4. View B: Profile Additional Details (More Info Screen)
+   ========================================================================== */
+.academic-top-card {
+  padding: 12px 16px;
+  border-bottom: 1.5px solid var(--border-color);
+  border-radius: 0;
+  background-color: var(--bg-app-blue);
+}
+
+.profile-header-strip {
+  background-color: var(--bg-white);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid var(--border-color);
+}
+
+.profile-header-strip h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.strip-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.strip-btn {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color-dark);
+  padding: 5px 10px;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--navy-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.strip-btn.active-btn {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* Table layout styling for lower details card */
+.details-card.white-card {
+  border-radius: 0;
+  padding: 8px 16px;
+  background-color: var(--bg-white);
+}
+
+.border-bottom-row {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 10px 0;
+}
+
+.border-bottom-row:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   5. Hamburger Sidebar Drawer Navigation
+   ========================================================================== */
+#sidebar-drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 82%;
+  max-width: 340px;
+  height: 100%;
+  background-color: var(--bg-white);
+  z-index: 1000;
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#sidebar-drawer.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  height: 56px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sidebar-divider-line {
+  width: 1.5px;
+  height: 24px;
+  background-color: var(--border-color-dark);
+}
+
+.sidebar-brand-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+/* Search Box Container */
+.sidebar-search-box {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--navy-light);
+  pointer-events: none;
+}
+
+#menu-search-input {
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 14px;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid var(--border-color-dark);
+  border-radius: 6px;
+  outline: none;
+  color: var(--navy-dark);
+}
+
+#menu-search-input:focus {
+  border-color: var(--primary-blue);
+}
+
+/* Sidebar Navigation Scrollable Body */
+.sidebar-nav-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--navy-dark);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color var(--transition-speed);
+}
+
+.sidebar-nav-item:hover {
+  background-color: #f8fafc;
+}
+
+.nav-item-icon {
+  color: var(--primary-blue);
+  flex-shrink: 0;
+}
+
+/* Sidebar Backdrop Blur */
+#sidebar-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.4);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#sidebar-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   6. Bottom Navigation Bar
+   ========================================================================== */
+#app-bottom-nav {
+  height: 58px;
+  background-color: var(--bg-header);
+  border-top: 1.5px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.nav-item-btn {
+  background: none;
+  border: none;
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--navy-muted);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: 11px;
+  font-weight: 500;
+  transition: color var(--transition-speed);
+}
+
+.nav-item-btn svg {
+  opacity: 0.85;
+  transition: transform 0.2s;
+}
+
+.nav-item-btn:hover svg {
+  transform: translateY(-2px);
+}
+
+.nav-item-btn.active {
+  color: var(--primary-blue);
+}
+
+.nav-item-btn.active svg {
+  opacity: 1;
+  color: var(--primary-blue);
+}
+
+/* ==========================================================================
+   7. Apps Dashboard & Extra Views Styles
+   ========================================================================== */
+.view-header {
+  margin-bottom: 20px;
+  padding: 0 4px;
+}
+
+.view-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.view-header p {
+  font-size: 13px;
+  color: var(--navy-muted);
+  margin-top: 4px;
+}
+
+/* Apps Grid */
+.apps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-widget {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.widget-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.badge.green {
+  background-color: var(--accent-green-bg);
+  color: var(--accent-green-text);
+}
+
+.badge.blue {
+  background-color: #eff6ff;
+  color: var(--primary-blue);
+}
+
+/* Circular Progress Chart */
+.attendance-ring-container {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 90px;
+  max-height: 90px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #f1f5f9;
+  stroke-width: 2.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke: var(--primary-blue);
+  animation: progress 1s ease-out forwards;
+}
+
+.percentage {
+  fill: var(--navy-dark);
+  font-family: var(--font-family);
+  font-size: 8px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.widget-desc {
+  font-size: 11px;
+  color: var(--navy-muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.token-number {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.class-subject {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.class-time {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary-blue);
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+/* Accessibility Settings Switches */
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.setting-row:last-child {
+  border-bottom: none;
+}
+
+.setting-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.setting-info p {
+  font-size: 12px;
+  color: var(--navy-muted);
+  margin-top: 2px;
+}
+
+/* Switch Button slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: .3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-blue);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Scale Buttons */
+.scale-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.scale-btn {
+  background-color: #f1f5f9;
+  border: 1px solid var(--border-color-dark);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.scale-btn.active {
+  background-color: var(--primary-blue);
+  color: #fff;
+  border-color: var(--primary-blue);
+}
+
+/* Settings view overrides */
+.settings-upload-container {
+  max-width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.settings-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#settings-form .form-group {
+  margin-bottom: 16px;
+}
+
+#settings-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy-muted);
+  margin-bottom: 6px;
+}
+
+#settings-form input,
+#settings-form textarea {
+  font-family: var(--font-family);
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  width: 100%;
+}
+
+/* Cafeteria Page Styles */
+.cafeteria-date-floor {
+  font-size: 14px;
+  color: var(--navy-muted);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.cafeteria-qr-card {
+  background-color: #fffcd6; /* light pastel yellow */
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.qr-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.qr-card-icon {
+  color: #b45309; /* gold-amber icon */
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.qr-card-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #78350f; /* deep bronze brown text */
+  font-weight: 500;
+}
+
+.qr-card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.qr-btn-outline {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #f8fafc;
+  color: var(--navy-dark);
+  border: 1px solid var(--border-color-dark);
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.qr-btn-outline:hover {
+  background-color: #f1f5f9;
+}
+
+.qr-btn-filled {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #1e3a8a; /* Bennett Blue */
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.qr-btn-filled:hover {
+  background-color: #172554;
+}
+
+/* Modal Drawer Popup styling */
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.6);
+  z-index: 2000;
+  justify-content: center;
+  align-items: flex-end; /* Bottom sheet align */
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 24px 24px 0 0; /* Rounded top corners only */
+  padding: 16px 24px 24px;
+  width: 100%;
+  max-width: 450px; /* fit the mockup container */
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.15);
+  animation: modalSlideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* Modal Notch */
+.modal-notch {
+  width: 36px;
+  height: 4px;
+  background-color: #cbd5e1;
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.close-modal {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--navy-light);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: var(--navy-dark);
+}
+
+/* Modal Body */
+.modal-body {
+  text-align: center;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 0 8px 16px;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+.modal-instruction {
+  font-size: 14.5px;
+  color: var(--navy-muted);
+  margin-bottom: 18px;
+  font-weight: 400;
+}
+
+.qr-code-box {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  display: inline-block;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 20px;
+  padding-top: 16px;
+}
+
+.modal-download-btn {
+  font-family: var(--font-family);
+  font-size: 13.5px;
+  font-weight: 600;
+  background-color: #2b6cb0; /* blue matches screenshot button */
+  color: #ffffff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+}
+
+.modal-download-btn:hover {
+  background-color: #1a528c;
+}
+
+/* Meal Section Cards styling */
+.cafeteria-meals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 24px;
+}
+
+.meal-section-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+}
+
+.meal-svg-icon {
+  color: #6c7a9c;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.meal-details {
+  width: 100%;
+}
+
+.meal-title-time {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy-dark);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.meal-menu-items {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.meal-menu-items p {
+  margin-bottom: 4px;
+}
+
+.meal-menu-items p:last-child {
+  margin-bottom: 0;
+}
+
+.meal-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 12px;
+}
+
+.meal-day-badge {
+  background-color: #e6fcf5; /* light green */
+  color: #047857; /* green */
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.meal-status-btn {
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #ffffff;
+  color: var(--navy-dark);
+  border: 1px solid var(--border-color-dark);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.meal-status-btn:hover {
+  background-color: #f8fafc;
+}
+
+.meal-status-btn.served {
+  background-color: #0f766e; /* teal/green served button */
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+}
+
+.meal-status-btn.served:hover {
+  background-color: #0d5c56;
+}
+
+/* Specific override for Meal Modal height to cover only 70% of viewport */
+#meal-qr-modal .modal-content {
+  height: 70%;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#meal-qr-modal .modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
